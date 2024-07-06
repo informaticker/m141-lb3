@@ -1,7 +1,4 @@
 # M141 LB3
-
-[toc]
-
 ## DB Dump importieren
 ```bash
 wget https://gitlab.com/ch-tbz-it/Stud/m141/m141/-/raw/main/LB3-Praxisarbeit/backpacker_ddl_lb3.sql?ref_type=heads -O backpacker_ddl_lb3.sql
