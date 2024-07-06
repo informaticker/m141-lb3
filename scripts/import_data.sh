@@ -8,10 +8,8 @@ cd backpacker_lb3.csv/
 import_csv() {
     local file=$1
     local table_name=$(basename "$file" .csv | sed 's/backpacker_lb3_table_//')
-    
     # remove CSV header from file, store in temp file
     tail -n +2 "$file" > "${file}.tmp"
-    
     # import csv
     # this could be done cleaner; it will require entering the password n times. but we don't store passwords in cleartext around here
     mysql -p "lb3eliamilena" <<EOF
@@ -22,11 +20,9 @@ import_csv() {
     LINES TERMINATED BY '\n'
     ($(head -n 1 "$file" | sed 's/"//g'));
 EOF
-    
     # remove temp file 
     rm "${file}.tmp"
 }
-
 for file in backpacker_lb3_table_*.csv; do
     import_csv "$file"
 done
