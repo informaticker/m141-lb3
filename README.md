@@ -1,4 +1,51 @@
 # M141 LB3
+
+Dieses Repo enthält unsere Abgabe zur LB3.
+
+Die SQL-Scripts führen folgendes aus:
+- Renaming der Tabellen zu einheitlichem Schema
+- Setzt Privilegien nach Tabelle
+- Hashen der Passwörter
+- Korrekte Anwendung von Foreign-Keys
+- Erstellt Indexes
+- Optimiert die Tabellen
+
+TODO:
+- [ ] Komplettes Build Script
+- [ ] Hinzufügen von DB-Dump
+- [ ] Salt und Pepper hinzufügen
+
+## Änderungen anwenden
+Zuerst muss die Datenbank gebaut werden:
+```bash
+cd scripts && bash build_data.sh
+```
+Dieses Script wird:
+1. Eine neue Datenbank mit dem gegebenen Schema erstellen
+2. Die gegebenen Daten importieren
+
+Wichtig hier ist, das der gleiche Datenbankname bei den nächsten Scripts verwendet wird.
+
+Danach können die Änderungen aus diesem Repo angewendet werden; entweder manuell mithilfe den [Scripts](./scripts/) im Ordner oder mit dem [apply_sql.sh](./scripts/apply_sql.sh) Script.
+
+#### Script:
+```bash
+cd scripts && bash apply_sql.sh
+```
+
+#### Manuell
+```bash
+cd sql
+mysql -p [DATENBANKNAME] < rename_tables.sql
+mysql -p [DATENBANKNAME] < user_perms.sql
+mysql -p [DATENBANKNAME] < hash_passwords.sql
+mysql -p [DATENBANKNAME] < foreign_keys.sql
+mysql -p [DATENBANKNAME] < indexes.sql
+mysql -p [DATENBANKNAME] < optimize_tables.sql
+```
+**WICHTIG**: Die Scripts müssen in dieser Reihenfolge ausgeführt werden, ansonsten wird es Konflikte geben/nicht funktionieren.
+
+# Outdated
 ## DB Dump importieren
 ```bash
 wget https://gitlab.com/ch-tbz-it/Stud/m141/m141/-/raw/main/LB3-Praxisarbeit/backpacker_ddl_lb3.sql?ref_type=heads -O backpacker_ddl_lb3.sql
